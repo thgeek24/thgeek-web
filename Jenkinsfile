@@ -1,17 +1,30 @@
 pipeline {
     agent any
+
     stages {
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'git@github.com:thgeek24/my-fullstack-website.git'
             }
         }
+
         stage('Build and Test') {
             steps {
-                // Run build scripts for frontend and backend
-                sh 'npm ci && npm run build'
+                // Node.js and npm are now available
+                sh 'node --version'
+                sh 'npm --version'
+
+                // Install dependencies
+                sh 'npm ci'
+
+                // Build the project
+                sh 'npm run build'
+
+                // Run tests
+//                 sh 'CI=true npm test -- --passWithNoTests'
             }
         }
+
         stage('Deploy Docker Containers') {
             steps {
                 script {
@@ -23,7 +36,7 @@ pipeline {
                    sh 'docker rm my-fullstack-website-frontend  || true'
 
                    // Run the new container
-                   sh 'docker run -d my-fullstack-website-frontend -p 3000:3000 my-fullstack-website-frontend:latest'
+                   sh 'docker run -d -p 3000:80 --name my-fullstack-website-frontend my-fullstack-website-frontend:latest'
 
                    // Optional: Push to a Docker registry
                    // sh 'docker push my-registry/my-frontend-app:${BUILD_NUMBER}'
