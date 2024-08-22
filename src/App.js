@@ -13,8 +13,8 @@ function App() {
         <div className="App">
             <Header/>
             <main className="App-main">
-                <h2>Welcome to My Full-Stack Website</h2>
-                <p>This is the beginning of my journey to become a full-stack engineer.</p>
+                <h2>Welcome to THGeek@COM</h2>
+                <p>A place where function meets fascination.</p>
                 <Button text="Click me!" onClick={handleClick}/>
             </main>
             <Footer/>

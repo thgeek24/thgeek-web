@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
     return (<footer className="App-footer">
-        <p>&copy; 2024 My Full-Stack Website. All rights reserved</p>
+        <p>Copyright © 2024 THGeek. All Rights Reserved.</p>
     </footer>);
 }
 
