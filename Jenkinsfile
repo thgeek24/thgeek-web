@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'git@github.com:thgeek24/my-fullstack-website.git'
+                git branch: 'main', url: 'git@github.com:thgeek24/thgeek-web.git'
             }
         }
 
@@ -29,14 +29,14 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh 'docker build -t my-fullstack-website-frontend:latest .'
+                    sh 'docker build -t thgeek-web:latest .'
 
                    // Stop and remove the old container if it exists
-                   sh 'docker stop my-fullstack-website-frontend  || true'
-                   sh 'docker rm my-fullstack-website-frontend  || true'
+                   sh 'docker stop thgeek-web || true'
+                   sh 'docker rm thgeek-web || true'
 
                    // Run the new container
-                   sh 'docker run -d -p 3000:80 --name my-fullstack-website-frontend my-fullstack-website-frontend:latest'
+                   sh 'docker run -d -p 3000:80 --name thgeek-web thgeek-web:latest'
 
                    // Optional: Push to a Docker registry
                    // sh 'docker push my-registry/my-frontend-app:${BUILD_NUMBER}'
